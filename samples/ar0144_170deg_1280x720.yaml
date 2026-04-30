@@ -1,0 +1,61 @@
+# OnSemi AR0144 — 170deg fisheye lens, 1280x720
+#
+# Real calibrated intrinsics for an AR0144 global-shutter monochrome sensor
+# with a 170deg fisheye lens, captured at 1280x720. KB4 fit results from a
+# calibration run, not datasheet/FOV-derived values.
+#
+# Note the off-center principal point (cy ~ 302 << height/2 = 360) and the
+# alternating-sign k1..k4 — both are typical when a wide fisheye is fit to
+# the KB4 model. These are characteristic of *this physical unit*; do not
+# transfer them to another lens, even nominally identical.
+#
+# Sensor       : OnSemi AR0144, global shutter monochrome
+# Lens         : ~170deg fisheye
+# Resolution   : 1280x720
+# Mount        : Nadir-pointing
+# Calibration  : KB4 fisheye
+
+name: ar0144_170deg_1280x720
+
+resolution:
+  width: 1280
+  height: 720
+
+fps: 60
+
+intrinsics:
+  fx: 730.448019227585
+  fy: 731.443962673748
+  cx: 682.0618397467757
+  cy: 302.1966884964574
+  k1: -0.044533485023068614
+  k2: 0.08896380835788192
+  k3: -0.18823975531627266
+  k4: 0.13452362797175768
+
+extrinsics:
+  # Camera pose relative to body frame (NED: X forward, Y right, Z down).
+  # The quaternion below is approximately a 180deg rotation about the
+  # X+Y diagonal — a nadir-pointing camera with image X = body Y.
+  body_frame:
+    orientation:
+      w: 0.00202
+      x: 0.70568
+      y: 0.70853
+      z: 0.00170
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+
+  # Legacy field. Cyclops does not currently consume imu_frame. Identity.
+  imu_frame:
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0

@@ -1,0 +1,60 @@
+# FLIR Boson 640 — 4.3mm lens
+#
+# Real calibrated intrinsics for a FLIR Boson 640 thermal camera fitted with
+# a 4.3mm lens. These are KB4 fit results from a calibration run, not
+# datasheet/FOV-derived values, so they are good reference numbers when you
+# want to know what real intrinsics for this optic look like.
+#
+# Replace these values with the calibration of your own physical unit before
+# putting anything into production — even nominally identical lenses vary
+# from sample to sample.
+#
+# Sensor       : 640x512 LWIR (8-14um), 60fps native
+# Lens         : 4.3mm
+# Mount        : Nadir-pointing
+# Calibration  : KB4 fisheye
+
+name: boson_640_4.3mm
+
+resolution:
+  width: 640
+  height: 512
+
+fps: 60
+
+intrinsics:
+  fx: 739.3357436433457
+  fy: 742.0901070408989
+  cx: 312.14917201772454
+  cy: 260.7352968667201
+  k1: -0.19070162586960507
+  k2: 0.4868787243299567
+  k3: -2.8951449908651177
+  k4: 5.321342358367627
+
+extrinsics:
+  # Camera pose relative to body frame (NED: X forward, Y right, Z down).
+  # The quaternion below is approximately a 180deg rotation about the
+  # X+Y diagonal — a nadir-pointing camera with image X = body Y.
+  body_frame:
+    orientation:
+      w: 0.00202
+      x: 0.70568
+      y: 0.70853
+      z: 0.00170
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+
+  # Legacy field. Cyclops does not currently consume imu_frame. Identity.
+  imu_frame:
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0

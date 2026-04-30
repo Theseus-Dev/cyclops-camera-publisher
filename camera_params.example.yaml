@@ -1,0 +1,46 @@
+# Example Cyclops nadir camera calibration.
+#
+# Replace these values with the calibration for your physical camera and mount.
+
+resolution:
+  width: 640
+  height: 512
+
+fps: 30
+
+intrinsics:
+  fx: 411.37
+  fy: 411.22
+  cx: 317.80
+  cy: 257.89
+  k1: 0.133336
+  k2: 0.0
+  k3: 0.0
+  k4: 0.52395
+
+extrinsics:
+  # Camera pose relative to body frame.
+  # Body frame convention: X forward, Y right, Z down.
+  body_frame:
+    orientation:
+      w: 0.00202
+      x: 0.70568
+      y: 0.70853
+      z: 0.00170
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+
+  # Legacy field. Cyclops does not currently consume imu_frame. Publish identity
+  # (zero translation, unit quaternion) unless Theseus tells you otherwise.
+  imu_frame:
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
