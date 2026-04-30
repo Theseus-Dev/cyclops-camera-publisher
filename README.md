@@ -96,7 +96,7 @@ applied):
 [Unit]
 Description=USB Nadir Camera Publisher
 After=network.target
-Before=mvps.service
+Before=cyclops.service
 
 [Service]
 Type=simple
@@ -116,9 +116,9 @@ WantedBy=multi-user.target
 The service user defaults to `pi`; some builds use a different account
 (e.g. `theseus`) — check `systemctl cat` to confirm.
 
-Two ordering constraints to mirror:
+Two ordering constraints to mirror in your replacement:
 
-- `Before=mvps.service` — MapMatcher comes up degraded if `S1/cama` is
+- `Before=cyclops.service` — MapMatcher comes up degraded if `S1/cama` is
   silent at startup.
 - `Restart=on-failure` — your replacement should be similarly resilient or
   run behind an equivalent restart policy.
@@ -139,12 +139,13 @@ for the camera, then drop in your own:
 ```bash
 sudo systemctl disable --now usb-camera.service
 
-sudo cp my-camera.service /etc/systemd/system/   # mirror Before=mvps.service
+# unit file should declare Before=cyclops.service
+sudo cp my-camera.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now my-camera.service
 
 ecal_mon_gui                                     # confirm S1/cama
-sudo systemctl restart mvps.service              # if mvps started before your stream
+sudo systemctl restart cyclops.service           # if cyclops started before your stream
 ```
 
 **From another host on the same eCAL network.** Don't touch the device
@@ -159,7 +160,7 @@ Either way, the contract is:
 | eCAL type | `capnp:Image` |
 | Schema | `vkc::Image` (`capnp/image.capnp`) |
 | Encoding | JPEG, grayscale |
-| Ordering | Up before `mvps.service`, or restart `mvps.service` after |
+| Ordering | Up before `cyclops.service`, or restart `cyclops.service` after |
 
 ## Data path
 
